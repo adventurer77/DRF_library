@@ -6,6 +6,8 @@ from .utils.permissions import IsAdminOrReadOnly
 from .models import Book, Author, Category, Loan, Reservation, Review, UserProfile
 from .serializers import BookSerializer, AuthorSerializer, CategorySerializer, LoanSerializer, ReservationSerializer, ReviewSerializer, UserProfileSerializer
 
+from rest_framework.permissions import IsAuthenticated
+
 from django.shortcuts import render
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -41,7 +43,8 @@ class BookViewSet(viewsets.ModelViewSet):
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
-    permission_classes = (IsAdminOrReadOnly,)
+    # permission_classes = (IsAdminOrReadOnly,)
+    permission_classes = (IsAuthenticated, )
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
