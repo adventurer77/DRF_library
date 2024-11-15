@@ -1,9 +1,12 @@
 # from rest_framework import generics
 from rest_framework import viewsets
 
-from main.utils.pagination import BookPagination
+from .utils.pagination import BookPagination
+from .utils.permissions import IsAdminOrReadOnly
 from .models import Book, Author, Category, Loan, Reservation, Review, UserProfile
 from .serializers import BookSerializer, AuthorSerializer, CategorySerializer, LoanSerializer, ReservationSerializer, ReviewSerializer, UserProfileSerializer
+
+from rest_framework.permissions import IsAuthenticated
 
 from django.shortcuts import render
 from rest_framework.decorators import action
@@ -16,6 +19,7 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     pagination_class = BookPagination
+    permission_classes = (IsAdminOrReadOnly,)
 
     # def get_queryset(self): # Overriding the method 
     #     pk = self.kwargs.get("pk")
@@ -39,31 +43,36 @@ class BookViewSet(viewsets.ModelViewSet):
 class AuthorViewSet(viewsets.ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
-
+    # permission_classes = (IsAdminOrReadOnly,)
+    permission_classes = (IsAuthenticated, )
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-
+    permission_classes = (IsAdminOrReadOnly,)
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class LoanViewSet(viewsets.ModelViewSet):
     queryset = Loan.objects.all()
     serializer_class = LoanSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class ReservationViewSet(viewsets.ModelViewSet):
     queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
 # class BookViewSet(generics.ListAPIView): # CET
 #     queryset = Book.objects.all()
