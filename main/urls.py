@@ -6,10 +6,10 @@ router = DefaultRouter()
 router.register(r'books', views.BookViewSet)
 router.register(r'authors', views.AuthorViewSet)
 router.register(r'categories', views.CategoryViewSet)
-router.register(r'user_profile', views.UserProfileViewSet)
-router.register(r'loan', views.LoanViewSet)
-router.register(r'review', views.ReviewViewSet)
-router.register(r'reservation', views.ReservationViewSet)
+router.register(r'user_profiles', views.UserProfileViewSet)
+router.register(r'loans', views.LoanViewSet)
+router.register(r'reviews', views.ReviewViewSet)
+router.register(r'reservations', views.ReservationViewSet)
 
 urlpatterns = [
     path('', include(router.urls)), 
